@@ -6,6 +6,5 @@ def getMousePos():
 
     return (currentMouseX, currentMouseY)
 
-print(getMousePos())
 
 

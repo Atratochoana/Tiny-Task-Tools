@@ -1,10 +1,10 @@
-from PIL import ImageGrab
+import src.mouse as mouse
+import src.screen as screen
 
-# Capture the entire screen
-screenshot = ImageGrab.grab()
 
-# Save the screenshot to a file
-screenshot.save("screenshot.png")
+mousePos = mouse.getMousePos()
 
-# Close the screenshot
-screenshot.close()
+screen.screenShot((mousePos[0],mousePos[1],mousePos[0]+100,mousePos[1]+100))
+
+
+
