@@ -11,6 +11,8 @@ with open("src/SSLoc.json","r") as f:
 def run(event):
     if event == "Failed":
         print("Failed is the same")
+    elif event == "Victory":
+        print("Victory is the same")
 
 def mainloop():
     for check in checks:

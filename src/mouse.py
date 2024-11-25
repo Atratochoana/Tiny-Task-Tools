@@ -1,12 +1,10 @@
-import pyautogui
-import time
 
+from pyautogui import position
 
 def getMousePos():
-    currentMouseX, currentMouseY = pyautogui.position()
+    currentMouseX, currentMouseY = position()
 
     return (currentMouseX, currentMouseY)
-
 
 
 

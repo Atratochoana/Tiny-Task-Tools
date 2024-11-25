@@ -1,5 +1,4 @@
 from PIL import ImageGrab
-from time import sleep
 
 
 def screenShot(bbox=None,name="Screenshot"):
@@ -11,7 +10,3 @@ def screenShot(bbox=None,name="Screenshot"):
 
     # Close the screenshot
     screenshot.close()
-
-def screenShotNoSave(bbox=None):
-    screenshot = ImageGrab.grab(bbox)
-    return screenShot
