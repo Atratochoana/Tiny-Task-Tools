@@ -22,9 +22,6 @@ def ImageComparer(Image1, Image2):
 
     # Average the SSIM for all channels
     ssim_mean = (ssim_r + ssim_g + ssim_b) / 3
-
-    print(f"SSIM (R channel): {ssim_r}")
-    print(f"SSIM (G channel): {ssim_g}")
-    print(f"SSIM (B channel): {ssim_b}")
+    
     print(f"Average SSIM (RGB): {ssim_mean}")
     return ssim_mean
