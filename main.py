@@ -1,10 +1,21 @@
-import src.mouse as mouse
-import src.screen as screen
+from src.screen import screenShot
+from compareImage import ImageComparer
+from time import sleep
+import json
+
+checks = {}
+
+with open("src/SSLoc.json","r") as f:
+    checks = json.load(f)
+
+def mainloop():
+    for check in checks:
+        print(check)
+        list = checks[check]
+        screenShot(list[0],f"temp/{check}")
+        if ImageComparer(f"Screenshots/temp/{check}.png",list[1]) >= 0.75:
+            print("Same")
 
 
-mousePos = mouse.getMousePos()
-
-screen.screenShot((mousePos[0],mousePos[1],mousePos[0]+100,mousePos[1]+100))
-
-
-
+for x in range(1):
+    mainloop()
