@@ -1,5 +1,5 @@
-import src.mouse as mouse
-import src.screen as screen
+import mouse as mouse
+import screen as screen
 from time import sleep
 
 def newScreenshot(name):
@@ -15,8 +15,6 @@ def newScreenshot(name):
     print(mouse2)
 
     screen.screenShot((mouse1[0],mouse1[1],mouse2[0],mouse2[1]),name)
-
-newScreenshot("Victory")
 
 
 
