@@ -21,5 +21,3 @@ def newScreenshot(name):
 
 
 
-
-

@@ -10,3 +10,5 @@ def screenShot(bbox=None,name="Screenshot"):
 
     # Close the screenshot
     screenshot.close()
+
+screenShot((417, 230,542, 330))

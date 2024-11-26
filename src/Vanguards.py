@@ -20,3 +20,8 @@ def place(pos,troop):
     sleep(0.25)
     auto.click()
     auto.click()
+
+def start():
+    for x in range(10):
+        auto.press("o")
+    
