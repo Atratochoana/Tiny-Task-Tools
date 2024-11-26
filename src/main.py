@@ -6,12 +6,14 @@ import json
 import cv2
 import pytesseract
 
-
+currentCash = 0
 
 #tinyTaskSlots = [(1094, 22),(1364, 22),(1638, 22),(1640, 112),(1362, 112),(1098, 112),(1098, 204)]
 
-with open("src/SSLoc.json","r") as f:
+with open("src\positions\comparisons.json","r") as f:
     checks = json.load(f)
+with open("src\positions\misc.json","r") as f:
+    misc = json.load(f)
 
 def run(event):
     if event == "Failed":
@@ -21,6 +23,8 @@ def run(event):
         print("Victory is the same")
 
 def mainloop():
+    screenShot((misc["yen"][0],misc["yen"][1],misc["yen"][2],misc["yen"][3]),"temp/Yen")
+    currentCash = getText("Screenshots/temp/Yen.png")
     for check in checks:
         print(check, end=": ")
         list = checks[check]
@@ -37,7 +41,6 @@ def getText(image):
     data = pytesseract.image_to_string(thresh, lang='eng',config='--psm 6')
     return data
 
-print(test("Screenshots/test.png"))
 
 for x in range(1):
     mainloop()

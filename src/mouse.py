@@ -11,5 +11,5 @@ def moveMousePos(pos):
     click()
 
 
-# sleep(3)
-# print(getMousePos())
+sleep(5)
+print(getMousePos())
