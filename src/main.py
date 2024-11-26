@@ -28,7 +28,7 @@ def mainloop():
         if ImageComparer(f"Screenshots/temp/{check}.png",list[1]) >= 0.75:
             run(check)
 
-def test(image):
+def getText(image):
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
     image = cv2.imread(image, 0)
