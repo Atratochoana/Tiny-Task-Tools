@@ -1,27 +1,48 @@
-import pyautogui as auto
+from ahk import AHK
+ahk = AHK()
 from time import sleep
 
 def upgrade():
-    auto.press("t")
+    ahk.win_activate("Roblox")
+    ahk.mouse_move(200,390)
+    ahk.click()
+
 
 def retry():
-    auto.moveTo((591, 481))
-    auto.click()
-    auto.click()
+    ahk.win_activate("Roblox")
+    ahk.mouse_move(588,486)
+    ahk.click()
 
 def skip():
-    auto.moveTo((443, 163))
-    auto.click()
-    auto.click()
+    ahk.win_activate("Roblox")
+    ahk.mouse_move(588,486)
+    ahk.click()
 
-def place(pos,troop):
-    auto.press(troop)
-    auto.moveTo(pos)
-    sleep(0.25)
-    auto.click()
-    auto.click()
+def place(ypos,xpos,troop):
+    ahk.win_activate("Roblox")
+    ahk.mouse_move(ypos,xpos)
+    ahk.click()
 
 def start():
     for x in range(10):
-        auto.press("o")
+        ahk.key_press("o")
+
+def restart():
+    ahk.win_activate("Roblox")
+    ahk.mouse_move(27,609)
+    ahk.click()
+    ahk.mouse_move(613,314)
+    ahk.click()
+    ahk.mouse_move(429,348)
+    ahk.click()
+    ahk.mouse_move(486,339)
+    ahk.click()
+    ahk.mouse_move(670,146)
+    ahk.click()
     
+retry()
+def test():
+    ahk.win_activate("Roblox")
+    sleep(2)
+    print(ahk.get_mouse_position())
+#test()
