@@ -16,6 +16,7 @@ def newScreenshot(name):
 
     screen.screenShot((mouse1[0],mouse1[1],mouse2[0],mouse2[1]),name)
 
+newScreenshot("VictoryFull")
 
 
 

@@ -40,7 +40,7 @@ def restart():
     ahk.mouse_move(670,146)
     ahk.click()
     
-retry()
+#retry()
 def test():
     ahk.win_activate("Roblox")
     sleep(2)

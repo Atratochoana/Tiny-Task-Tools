@@ -11,5 +11,5 @@ def moveMousePos(pos):
     click()
 
 
-sleep(5)
-print(getMousePos())
+# sleep(5)
+# print(getMousePos())

@@ -1,4 +1,6 @@
 {
     "Failed": [[263, 161,407, 198],"Screenshots/Failed.png"],
-    "Victory": [[263, 161,407, 198],"Screenshots/Victory.png"]
+    "Victory": [[263, 161,407, 198],"Screenshots/Victory.png"],
+    "FailedFull": [[557, 222,815, 275],"Screenshots/FailedFull.png"],
+    "VictoryFull": [[557, 222,815, 275],"Screenshots/VictoryFull.png"]
 }
