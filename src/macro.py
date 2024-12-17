@@ -20,23 +20,26 @@ def find(string, char):
 def find_indices(string, chars):
     return [[i for i, ltr in enumerate(string) if ltr == char] for char in chars]
 
-def decompile(filePath):
-    testString = ":3:1412:515::1:1312:615:;30u5;;30u10;;30u0;"
+def decompile(filePath: str):
+    """Takes a macro filepath (custom .txt) and then will execute the macro, will not stop unless manually done or through ending task or something"""
+
+    with open(filePath,"r") as f:
+        string = f.read()
+    
     actions = []
     chars = []
     characters = [[],[],[],[],[],[]]
 
-    indices = find_indices(testString,[":",";"]) #[[0, 2, 7, 11], [12, 17, 18, 24, 25, 30]]
-    print(f"Indices = {indices}")
+    indices = find_indices(string,[":",";"])
     for x in range(int(len(indices[0])/4)):
-        chars.append(testString[indices[0][int(4**(x-1))]:indices[0][(int(4**(x-1))+3)]+1])
+        chars.append(string[indices[0][int(4*(x))]:indices[0][(int(4*(x))+3)]+1])
 
-    print(chars)
+    for x in range(int(len(indices[1])/2)):
+        actions.append(string[indices[1][int(2*(x))]:indices[1][(int(2*(x))+1)]+1])
+
     for c in chars:
         colonIndex = find(c,":")
-        print(colonIndex)
         characters[int(c[1])].append([int(c[colonIndex[1]+1:colonIndex[2]]),int(c[colonIndex[2]+1:len(c)-1])])
-    print(characters)
 
     for action in actions:
         ahk.find_window(title="Roblox").activate()
@@ -66,7 +69,4 @@ def decompile(filePath):
             ahk.click(button="wheeldown")
             ahk.click(button="wheeldown")
         
-
-
-
-decompile(None)
+#decompile("src\macros/test.txt")

@@ -7,8 +7,8 @@ class App(ctk.CTk):
         self.title("Vanguards Macros")
         self.geometry("700x500")
         self.resizable(False,False)
-        self.grid_columnconfigure(1, weight=1)
-        self.grid_rowconfigure(0,weight=1)
+        self.columnconfigure(1, weight=1)
+        self.rowconfigure(0,weight=1)
 
         self.sideBarFrame = ctk.CTkFrame(master=self,width=150,corner_radius=0)
         self.sideBarFrame.grid(sticky="nesw",column=0,row=0)
@@ -25,7 +25,7 @@ class App(ctk.CTk):
 
 
         #------------ SideBar -------------#
-        self.sideBarFrame.grid_rowconfigure(6, weight=1)
+        self.sideBarFrame.rowconfigure(6, weight=1)
 
 
         self.sideBarLabel = ctk.CTkLabel(master=self.sideBarFrame,text="Sidebar",font=ctk.CTkFont(size=30))
@@ -75,7 +75,7 @@ class App(ctk.CTk):
         else:
             self.webhookFrame.grid_forget()
         if name == "creator":
-            self.creatorFrame.grid(row=0, column=1, sticky="nsew")
+            self.creatorFrame.grid(row=0, column=1, sticky="nesw")
         else:
             self.creatorFrame.grid_forget()
         if name == "setting":
@@ -96,6 +96,7 @@ class macroFrame(ctk.CTkFrame):
         super().__init__(*args,**kwargs)
         self._corner_radius = 0
         self._fg_color = "transparent"
+        self.configure(width=500, height=500)
         self.grid_rowconfigure(0,weight=1)
         self.grid_columnconfigure(0,weight=1)
 
@@ -107,6 +108,7 @@ class webhookFrame(ctk.CTkFrame):
         super().__init__(*args,**kwargs)
         self._corner_radius = 0
         self._fg_color = "transparent"
+        self.configure(width=500, height=500)
         self.grid_rowconfigure(0,weight=1)
         self.grid_columnconfigure(0,weight=1)
 
@@ -118,17 +120,26 @@ class creatorFrame(ctk.CTkFrame):
         super().__init__(*args,**kwargs)
         self._corner_radius = 0
         self._fg_color = "transparent"
-        self.grid_rowconfigure(0,weight=1)
-        self.grid_columnconfigure(0,weight=1)
+        self.configure(width=500, height=500)
+        self.rowconfigure((0,1,2,3,4),weight=1)
+        self.columnconfigure((0,1,2,3,4),weight=1)
+        self.grid_propagate(False)
 
-        self.label = ctk.CTkLabel(master=self,text="Creator")
-        self.label.grid(row=0,column=0,sticky="nesw")
+        self.nameBox = ctk.CTkTextbox(master=self,activate_scrollbars=False,height=30,width=300)
+        self.nameBox.grid(row=0,columnspan=3,column=0)
+        self.startButton = ctk.CTkButton(master=self,text="Start recording",command=self.startBtnCallback,height=30)
+        self.startButton.grid(row=0,column=4)
     
+    def startBtnCallback(self):
+        print("Started")
+
+
 class settingFrame(ctk.CTkFrame):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
         self._corner_radius = 0
         self._fg_color = "transparent"
+        self.configure(width=500, height=500)
         self.grid_rowconfigure(0,weight=1)
         self.grid_columnconfigure(0,weight=1)
 
@@ -140,6 +151,7 @@ class infoFrame(ctk.CTkFrame):
         super().__init__(*args,**kwargs)
         self._corner_radius = 0
         self._fg_color = "transparent"
+        self.configure(width=500, height=500)
         self.grid_rowconfigure(0,weight=1)
         self.grid_columnconfigure(0,weight=1)
 
