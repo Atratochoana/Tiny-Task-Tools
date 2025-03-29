@@ -1,4 +1,5 @@
 import customtkinter as ctk
+import macro
 
 class App(ctk.CTk):
     def __init__(self):
@@ -14,6 +15,7 @@ class App(ctk.CTk):
         self.sideBarFrame.grid(sticky="nesw",column=0,row=0)
         self.mainFrame = ctk.CTkFrame(master=self,width=500,corner_radius=0,fg_color=("gray75", "gray25"))
         self.mainFrame.grid(sticky="news",column=1,row=0)
+        self.macroMaker = None
 
         #---------Frames----------#
         self.macroFrame = macroFrame(self)
@@ -126,12 +128,59 @@ class creatorFrame(ctk.CTkFrame):
         self.grid_propagate(False)
 
         self.nameBox = ctk.CTkTextbox(master=self,activate_scrollbars=False,height=30,width=300)
-        self.nameBox.grid(row=0,columnspan=3,column=0)
+        self.nameBox.grid(row=0,columnspan=3,column=0,pady=0)
+        self.nameBox.insert(text="Macro name",index="0.0")
         self.startButton = ctk.CTkButton(master=self,text="Start recording",command=self.startBtnCallback,height=30)
         self.startButton.grid(row=0,column=4)
+        self.actionFrame = ctk.CTkScrollableFrame(master=self,height=300)
+        self.actionFrame.grid(row=1,sticky="ew",columnspan=5,padx=20)
+        self.slotDropDownLabel = ctk.CTkLabel(master=self,text="Slot")
+        self.slotDropDownLabel.grid(row=2,column=0)
+        self.slotDropDown = ctk.CTkOptionMenu(master=self,values=["1","2","3","4","5","6"],width=100,command=self.slotDropDownCallBack)
+        self.slotDropDown.grid(row=3,column=0,pady=(0,35))
+        self.typeLabel = ctk.CTkLabel(master=self,text="Action type")
+        self.typeLabel.grid(row=2,column=1)
+        self.typeDropDown = ctk.CTkOptionMenu(master=self,values=["Place","Upgrade","Ability","Delete","Skip wave"],width=100)
+        self.typeDropDown.grid(row=3,column=1,pady=(0,35))
+        self.indexlabel = ctk.CTkLabel(master=self,text="Index")
+        self.indexlabel.grid(row=2,column=2)
+        self.indexDropDown = ctk.CTkOptionMenu(master=self,values=["N/A"],width=100)
+        self.indexDropDown.grid(row=3,column=2,pady=(0,35))
+        self.addActionBtn = ctk.CTkButton(master=self,text="Add action",height=50,command=self.actionBtnCallBack)
+        self.addActionBtn.grid(row=2,rowspan=2,column=4,padx=(0,20),pady=(0,20))
     
     def startBtnCallback(self):
-        print("Started")
+        if self.master.macroMaker != None:
+            print("Stopping macro")
+            self.master.macroMaker.stopMacro()
+            self.master.macroMaker = None
+            self.startButton.configure(text="Start recording")
+            return
+        self.master.macroMaker = macro.macroMaker(self.nameBox.get("0.0",None))
+        self.startButton.configure(text="Stop Recording")
+
+    def slotDropDownCallBack(self,value):
+        if self.master.macroMaker == None:
+            print("Stopped")
+            return
+        index = 1
+        indexs = []
+        length = self.master.macroMaker.getCharIndex(value)
+        if length == 0:
+            self.indexDropDown.configure(values=["N/A"])
+            return
+        for x in range(length):
+            indexs.append(str(index))
+            index += 1
+        self.indexDropDown.configure(values=indexs)
+        return
+
+    def actionBtnCallBack(self):
+        self.master.macroMaker.addAction(self.slotDropDown.get(),self.indexDropDown.get(),self.typeDropDown.get())
+        self.actionFrame = ctk.CTkFrame(master=self.actionFrame,corner_radius=0,bg_color="transparent")
+        self.actionFrame.grid_columnconfigure((0,1,2,3),weight=1)
+        print(self.actionFrame)
+        self.actionTypeLabel = ctk.CTkLabel(master=self.actionFrame,text=self.typeDropDown.get())
 
 
 class settingFrame(ctk.CTkFrame):

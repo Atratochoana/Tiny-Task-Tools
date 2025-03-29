@@ -37,7 +37,6 @@ def run(event):
     elif event == "VictoryFull":
         ran += 1
         editWebhook(None, ran, failed)
-
     sleep(10)
 
 def mainloop():
